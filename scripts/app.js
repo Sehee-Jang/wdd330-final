@@ -1,3 +1,5 @@
+import { signUp, login, getUserProfile, logout } from "./auth.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   fetchTrendingMovies();
 });
@@ -29,3 +31,36 @@ function displayMovies(movies) {
     moviesContainer.appendChild(movieElement);
   });
 }
+// 회원가입 처리
+document
+  .getElementById("signup-form")
+  ?.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    signUp(email, password);
+  });
+
+// 로그인 처리
+document.getElementById("login-form")?.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const email = document.getElementById("login-email").value;
+  const password = document.getElementById("login-password").value;
+
+  login(email, password);
+});
+
+// 프로필 정보 표시
+if (document.getElementById("username") && document.getElementById("email")) {
+  const user = getUserProfile();
+  if (user) {
+    document.getElementById("username").textContent = user.email;
+    document.getElementById("email").textContent = user.email;
+  }
+}
+
+// 로그아웃 처리
+document.getElementById("logout")?.addEventListener("click", function () {
+  logout();
+});
