@@ -13,6 +13,7 @@ export function signUp(email, password) {
   const user = { email, password };
   localStorage.setItem("userEmail", email);
   localStorage.setItem("user", JSON.stringify(user));
+  console.log("저장된 사용자:", localStorage.getItem("user"));
   alert("회원가입 성공!");
 }
 

@@ -1,4 +1,4 @@
-import { signUp, login, getUserProfile, logout } from "./auth.js";
+import { signUp, login, getUserProfile, logout } from "../utils/auth";
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchTrendingMovies();
