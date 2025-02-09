@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,23 +7,80 @@
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
   <body>
-    <header>
-      <h1>🎬 Movie Recommendation System</h1>
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="pages/login.html">Login</a></li>
-          <li><a href="pages/signup.html">Sign Up</a></li>
-        </ul>
-      </nav>
+    <header class="header">
+      <h1><a href="#">Movie Recommendation System</a></h1>
+      <form class="search">
+        <input
+          type="text"
+          id="search_input"
+          class="input_text"
+          title="search movies"
+          placeholder="Search movies"
+        />
+        <button type="button" class="search_button" id="search_button">
+          <i class="iconset ico_search"></i> 검색
+        </button>
+      </form>
+
+      <!-- 로그인/회원가입 -->
+      <div id="auth-container">
+        <button id="signup-btn">Signup</button>
+        <button id="login-btn">Login</button>
+      </div>
+
+      <!-- 회원가입 Modal -->
+      <div id="signup-modal" class="modal">
+        <div class="modal-content">
+          <button class="close-btn" id="signup-close-btn">&times;</button>
+          <!-- 닫기 버튼 -->
+          <h2>회원가입</h2>
+          <input
+            type="email"
+            id="signup-email"
+            placeholder="이메일을 입력하세요"
+            required
+          />
+          <input
+            type="password"
+            id="signup-password"
+            placeholder="비밀번호를 입력하세요"
+            required
+          />
+          <button id="signup-submit">회원가입</button>
+        </div>
+      </div>
+
+      <!-- 로그인 Modal -->
+      <div id="login-modal" class="modal">
+        <div class="modal-content">
+          <button class="close-btn" id="login-close-btn">&times;</button>
+          <!-- 닫기 버튼 -->
+          <h2>로그인</h2>
+          <input
+            type="email"
+            id="login-email"
+            placeholder="이메일을 입력하세요"
+            required
+          />
+          <input
+            type="password"
+            id="login-password"
+            placeholder="비밀번호를 입력하세요"
+            required
+          />
+          <button id="login-submit">로그인</button>
+        </div>
+      </div>
     </header>
 
-    <main>
-      <section id="trending-movies">
-        <h2>🔥 Trending Movies</h2>
-        <div id="movies-container"></div>
-      </section>
-    </main>
+    <!-- 영화 리스트 -->
+    <section class="main_movie_list" id="movie-container">
+      <ul id="movie-list" class="movie_list"></ul>
+    </section>
+
+    <footer>
+      <p>&copy; 2024 Movie Recommendation System</p>
+    </footer>
 
     <script type="module" src="scripts/app.js"></script>
   </body>
