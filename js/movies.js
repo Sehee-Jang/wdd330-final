@@ -1,5 +1,6 @@
 const API_KEY = "02bf7eeb76ad14e4db3c689d31deefcc";
-const API_URL = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
+const BASE_URL = "https://api.themoviedb.org/3";
+const API_URL = `${BASE_URL}/trending/movie/week?api_key=${API_KEY}`;
 
 // 영화 리스트 가져오기
 export function fetchMovies() {
@@ -47,7 +48,10 @@ export function createMovieCard(movie) {
   });
 
   // 영화 카드 클릭 시 alert
-  movieCard.addEventListener("click", () => alert(`Movie ID: ${movie.id}`));
+  movieCard.addEventListener("click", () => {
+    // 클릭 시 상세 페이지로 이동
+    window.location.href = `/pages/details.html?id=${movie.id}`;
+  });
 
   return movieCard;
 }
@@ -55,6 +59,7 @@ export function createMovieCard(movie) {
 // 영화 리스트 표시 함수
 export function displayMovies(movies) {
   const movieListContainer = document.getElementById("movie-list");
+
   movieListContainer.innerHTML = "";
 
   movies.forEach((movie) => {
@@ -84,20 +89,67 @@ export function displayMovies(movies) {
 
 // 검색 기능 강화: 장르, 배우, 제목 등
 // 장르, 배우, 제목 등으로 영화 검색
-export function searchMovies(query, genre = "", actor = "") {
-  const searchUrl = `${API_URL}&query=${query}`;
+// export function searchMovies(query, genre = "", actor = "") {
+//   // const searchUrl = `${API_URL}&query=${query}`;
+//   const searchUrl = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`;
 
+//   fetch(searchUrl)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       const filteredMovies = data.results.filter((movie) => {
+//         return (
+//           movie.title.toLowerCase().includes(query.toLowerCase()) &&
+//           (genre ? movie.genre_ids.includes(genre) : true) &&
+//           (actor ? movie.cast.includes(actor) : true)
+//         );
+//       });
+//       displayMovies(filteredMovies);
+//     })
+//     .catch((error) => console.error("Error searching movies:", error));
+// }
+
+export function searchMovies(query, genre = "", actor = "") {
+  let searchUrl = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`;
+
+  // Apply genre filter if genre is specified (TMDb 장르 ID 필요)
+  if (genre) {
+    searchUrl = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genre}`;
+  }
+
+  // Execute movie title search
   fetch(searchUrl)
     .then((response) => response.json())
     .then((data) => {
-      const filteredMovies = data.results.filter((movie) => {
-        return (
-          movie.title.toLowerCase().includes(query.toLowerCase()) &&
-          (genre ? movie.genre_ids.includes(genre) : true) &&
-          (actor ? movie.cast.includes(actor) : true)
-        );
-      });
-      displayMovies(filteredMovies);
+      let filteredMovies = data.results;
+
+      // Apply actor search filter (search for actor by name, get ID, then get movies they acted in)
+      if (actor) {
+        fetch(`${BASE_URL}/search/person?api_key=${API_KEY}&query=${actor}`)
+          .then((response) => response.json())
+          .then((actorData) => {
+            if (actorData.results.length > 0) {
+              const actorId = actorData.results[0].id; // Get the actor's ID from the first result
+              fetch(
+                `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_cast=${actorId}`
+              )
+                .then((response) => response.json())
+                .then((actorMovies) => {
+                  // Combine actor search results with the title/genre results
+                  const actorMoviesList = actorMovies.results;
+                  filteredMovies = filteredMovies.filter((movie) =>
+                    actorMoviesList.some(
+                      (actorMovie) => actorMovie.id === movie.id
+                    )
+                  );
+                  displayMovies(filteredMovies);
+                });
+            } else {
+              displayMovies(filteredMovies); // If no actor results, display only title/genre search results
+            }
+          });
+      } else {
+        displayMovies(filteredMovies);
+      }
     })
     .catch((error) => console.error("Error searching movies:", error));
 }
@@ -129,7 +181,7 @@ export function getRecommendedMovies(userPreferences) {
  * Trending Movies
  * ***************************** */
 export function fetchTrendingMovies() {
-  const trendingUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`;
+  const trendingUrl = `${BASE_URL}/trending/movie/week?api_key=${API_KEY}`;
 
   fetch(trendingUrl)
     .then((response) => response.json())
@@ -140,10 +192,10 @@ export function fetchTrendingMovies() {
 }
 
 /* *****************************
- * 영화 상세 페이지
+ * Movie Overview
  * ***************************** */
 export function showMovieDetails(movieId) {
-  const movieDetailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`;
+  const movieDetailsUrl = `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`;
 
   fetch(movieDetailsUrl)
     .then((response) => response.json())
@@ -158,3 +210,7 @@ export function showMovieDetails(movieId) {
     })
     .catch((error) => console.error("Error fetching movie details:", error));
 }
+
+/* *****************************
+ * Movie Detail
+ * ***************************** */

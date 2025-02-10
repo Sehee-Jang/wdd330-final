@@ -1,0 +1,85 @@
+.posterDiv {
+  margin: 200px 0 150px 0;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.movieInfo {
+  margin-top: 20px;
+  margin-left: 50px;
+}
+
+.movieInfo div {
+  margin-bottom: 30px;
+  width: fit-content;
+}
+
+.detailTitle {
+  font-size: 30px;
+  font-weight: bold;
+  border-bottom: 3px solid #ff7211;
+}
+
+.minText {
+  display: flex;
+  flex-direction: row;
+}
+
+.minText p {
+  margin: 0;
+}
+
+.detailOverview {
+  width: 600px;
+  text-align: justify;
+}
+
+.detailOverview span {
+  display: inline-block;
+  margin-bottom: 8px;
+  border-bottom: 3px solid #42abae;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.actorTitle {
+  margin-bottom: 50px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.actorTitle span {
+  padding-bottom: 5px;
+  border-bottom: 3px solid #fbbc14;
+}
+
+.actorContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+}
+
+.actorImg {
+  background-color: #dbdbdb;
+  background-size: 50%;
+  width: 200px;
+  border-radius: 15px;
+  height: 300px;
+}
+
+.posterImg {
+  border-radius: 20px;
+}
+
+.actorInfo {
+  width: 200px;
+}
+
+li {
+  margin: 0 20px;
+}

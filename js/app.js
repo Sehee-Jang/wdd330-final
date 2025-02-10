@@ -1,11 +1,5 @@
 import { loadHeaderFooter } from "./utils.mjs";
-import {
-  fetchMovies,
-  searchMovies,
-  getRecommendedMovies,
-  fetchTrendingMovies,
-  showMovieDetails,
-} from "./movies.js";
+import { searchMovies } from "./movies.js";
 import { signup, login, updateAuthUI } from "./register.js";
 
 async function initialize() {
@@ -60,19 +54,10 @@ async function initialize() {
 
 window.addEventListener("DOMContentLoaded", initialize);
 
-// 영화 추천
-getRecommendedMovies({ genre: 28, minRating: 7.0 }); // 예시: '액션' 장르, 평점 7 이상인 영화들 추천
-
-// 페이지 로드 시 트렌드 영화 표시
-window.onload = fetchTrendingMovies;
-
-// 영화 카드 클릭 시 상세 정보 표시
-document.getElementById("movie-list").addEventListener("click", (event) => {
-  if (event.target.closest(".movie-card")) {
-    const movieId = event.target.closest(".movie-card").dataset.movieId;
-    showMovieDetails(movieId);
-  }
+// top 버튼
+document.getElementById("top-btn").addEventListener("click", function () {
+  window.scroll({
+    behavior: "smooth",
+    top: 0,
+  });
 });
-
-// 페이지 로드 시 기본 영화 리스트 표시
-fetchMovies();
