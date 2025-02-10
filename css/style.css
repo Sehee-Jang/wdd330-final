@@ -587,3 +587,24 @@ footer {
 .close-btn:hover {
   color: #ff9800; /* 호버 시 색상 변경 */
 }
+
+#auth-container {
+  padding: 15px 0;
+}
+
+#signup-btn,
+#login-btn,
+#logout-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+}
+
+#signup-btn:hover,
+#login-btn:hover,
+#user-nickname:hover,
+#logout-btn:hover {
+  color: #ff9800;
+  text-decoration: underline;
+}
