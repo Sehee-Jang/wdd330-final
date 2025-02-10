@@ -214,3 +214,39 @@ export function showMovieDetails(movieId) {
 /* *****************************
  * Movie Detail
  * ***************************** */
+/**
+ * 특정 영화의 상세 정보를 가져오는 함수
+ * @param {string} movieId - 영화 ID
+ * @returns {Promise<Object>} - 영화 상세 정보
+ */
+export async function getMovieDetails(movieId) {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`
+    );
+    if (!response.ok) throw new Error("영화 정보를 불러올 수 없습니다.");
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching movie details:", error);
+    return null;
+  }
+}
+
+/**
+ * 특정 영화의 출연진 정보를 가져오는 함수
+ * @param {string} movieId - 영화 ID
+ * @returns {Promise<Array>} - 출연진 목록
+ */
+export async function getMovieCredits(movieId) {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`
+    );
+    if (!response.ok) throw new Error("출연진 정보를 불러올 수 없습니다.");
+    const data = await response.json();
+    return data.cast.slice(0, 10); // 상위 10명만 가져오기
+  } catch (error) {
+    console.error("Error fetching movie credits:", error);
+    return [];
+  }
+}

@@ -1,85 +1,101 @@
-.posterDiv {
-  margin: 200px 0 150px 0;
-  height: auto;
+/* 전체 레이아웃 */
+.detailWrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* 영화 상세 정보 */
+.movie-detail {
   display: flex;
-  justify-content: center;
-}
-
-.movieInfo {
-  margin-top: 20px;
-  margin-left: 50px;
-}
-
-.movieInfo div {
+  gap: 20px;
+  align-items: flex-start;
   margin-bottom: 30px;
-  width: fit-content;
 }
 
-.detailTitle {
-  font-size: 30px;
-  font-weight: bold;
-  border-bottom: 3px solid #ff7211;
+.poster {
+  width: 250px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.minText {
-  display: flex;
-  flex-direction: row;
+.detail-info {
+  flex: 1;
 }
 
-.minText p {
-  margin: 0;
+.detail-info h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
-.detailOverview {
-  width: 600px;
-  text-align: justify;
+.detail-info p {
+  font-size: 16px;
+  margin: 5px 0;
 }
 
-.detailOverview span {
+.review-btn {
   display: inline-block;
-  margin-bottom: 8px;
-  border-bottom: 3px solid #42abae;
-  font-size: 18px;
-  font-weight: bold;
+  background-color: #e50914;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
 }
 
-.actorTitle {
-  margin-bottom: 50px;
+.review-btn:hover {
+  background-color: #b20710;
+}
+
+/* 출연 배우 목록 */
+h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.cast-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.actor {
   text-align: center;
-  font-size: 30px;
-  font-weight: 900;
 }
 
-.actorTitle span {
-  padding-bottom: 5px;
-  border-bottom: 3px solid #fbbc14;
+.actor img {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.actorContainer {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  list-style: none;
-  padding: 0;
-  justify-content: center;
+.actor p {
+  font-size: 14px;
+  margin: 5px 0;
 }
 
-.actorImg {
-  background-color: #dbdbdb;
-  background-size: 50%;
-  width: 200px;
-  border-radius: 15px;
-  height: 300px;
-}
+/* 반응형 스타일 */
+@media (max-width: 600px) {
+  .movie-detail {
+    flex-direction: column;
+    align-items: center;
+  }
 
-.posterImg {
-  border-radius: 20px;
-}
+  .poster {
+    width: 80%;
+  }
 
-.actorInfo {
-  width: 200px;
-}
+  .detail-info {
+    text-align: center;
+  }
 
-li {
-  margin: 0 20px;
+  .cast-list {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
 }
