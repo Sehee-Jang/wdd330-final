@@ -50,7 +50,7 @@ export function createMovieCard(movie) {
   // 영화 카드 클릭 시 alert
   movieCard.addEventListener("click", () => {
     // 클릭 시 상세 페이지로 이동
-    window.location.href = `wdd330-final/pages/details.html?id=${movie.id}`;
+    window.location.href = `/wdd330-final/pages/details.html?id=${movie.id}`;
   });
 
   return movieCard;
