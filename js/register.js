@@ -1,4 +1,4 @@
-import { validateEmail, validatePassword } from "./utils/auth.js";
+import { validateEmail, validatePassword } from "../utils/auth.js";
 
 /* *****************************
  * Modals
