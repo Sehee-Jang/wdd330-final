@@ -90,7 +90,7 @@ export function updateAuthUI() {
     `;
     // Redirect to profile page when clicking nickname
     document.getElementById("user-nickname").addEventListener("click", () => {
-      window.location.href = "profile.html";
+      window.location.href = "pages/profile.html";
     });
     // Logout button
     document.getElementById("logout-btn").addEventListener("click", logout);
