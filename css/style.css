@@ -207,6 +207,10 @@ section {
   margin: 0 auto;
 }
 
+#profile-info {
+  grid-template-columns: none !important;
+}
+
 .main_movie_list > .movie_list {
   display: block;
 }
