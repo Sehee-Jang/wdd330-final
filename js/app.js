@@ -54,7 +54,7 @@ async function initialize() {
 
 window.addEventListener("DOMContentLoaded", initialize);
 
-// top 버튼
+// top button
 document.getElementById("top-btn").addEventListener("click", function () {
   window.scroll({
     behavior: "smooth",
