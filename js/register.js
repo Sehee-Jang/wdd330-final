@@ -48,13 +48,12 @@ export function signup() {
     return;
   }
 
+  // Password validation
   if (!validatePassword(password)) {
     errorText.textContent =
       "Password must be at least 8 characters long and include uppercase, lowercase, numbers, and special characters.";
     errorText.style.color = "red";
-  } else {
-    errorText.textContent = "This is a password that can be used.";
-    errorText.style.color = "green";
+    return;
   }
 
   if (!confirmPassword(password, confirmPasswordValue)) {
