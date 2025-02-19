@@ -62,7 +62,7 @@ export function signup() {
     return;
   }
 
-  i; // Check if the email is already registered
+  // Check if the email is already registered
   const users = JSON.parse(localStorage.getItem("users")) || [];
   const existingUser = users.find((user) => user.email === email);
 
