@@ -32,16 +32,19 @@ export function signup() {
   const confirmPasswordValue = document
     .getElementById("signup-confirm-password")
     .value.trim();
+  const errorText = document.getElementById("error-text");
 
   // Check if all required fields are filled
   if (!email || !password || !confirmPasswordValue) {
-    alert("Please fill in all fields.");
+    errorText.textContent = "Please fill in all fields.";
+    errorText.style.color = "red";
     return;
   }
 
-  // 이메일과 비밀번호 유효성 검사
+  // Email validation
   if (!validateEmail(email)) {
-    alert("Please enter a valid email.");
+    errorText.textContent = "Please enter a valid email.";
+    errorText.style.color = "red";
     return;
   }
 
@@ -55,24 +58,22 @@ export function signup() {
   }
 
   if (!confirmPassword(password, confirmPasswordValue)) {
-    alert("Passwords do not match.");
+    errorText.textContent = "Passwords do not match.";
+    errorText.style.color = "red";
     return;
   }
 
-  if (!email || !password) {
-    alert("Please enter your email and password.");
-    return;
-  }
-
-  // Save to local storage
+  i; // Check if the email is already registered
   const users = JSON.parse(localStorage.getItem("users")) || [];
   const existingUser = users.find((user) => user.email === email);
 
   if (existingUser) {
-    alert("This email is already registered.");
+    errorText.textContent = "This email is already registered.";
+    errorText.style.color = "red";
     return;
   }
 
+  // Save to local storage
   users.push({ email, password });
   localStorage.setItem("users", JSON.stringify(users));
 
