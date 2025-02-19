@@ -1,3 +1,5 @@
+import { validateEmail, validatePassword } from "./utils/auth.js";
+
 /* *****************************
  * Modals
  * ***************************** */
@@ -23,6 +25,17 @@ export function closeModals() {
 export function signup() {
   const email = document.getElementById("signup-email").value.trim();
   const password = document.getElementById("signup-password").value.trim();
+
+  // 이메일과 비밀번호 유효성 검사
+  if (!validateEmail(email)) {
+    alert("Please enter a valid email.");
+    return;
+  }
+
+  if (!validatePassword(password)) {
+    alert("Password must be at least 8 characters long.");
+    return;
+  }
 
   if (!email || !password) {
     alert("Please enter your email and password.");
