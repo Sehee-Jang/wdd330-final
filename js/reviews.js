@@ -110,8 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
           <p class="commentUser">${review.name}</p>
           <p class="commentTime">${review.time}</p>
         </div>
-        <button class="edit" data-id="${review.id}">수정</button> 
-        <button class="del" data-id="${review.id}">삭제</button>
+        <button class="edit" data-id="${review.id}">Edit</button> 
+        <button class="del" data-id="${review.id}">Delete</button>
       `;
       reviewList.appendChild(reviewItem);
     });
