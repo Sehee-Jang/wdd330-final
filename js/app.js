@@ -1,10 +1,10 @@
-import { loadHeaderFooter } from "./utils.mjs";
+// import { loadHeaderFooter } from "./utils.mjs";
 import { searchMovies } from "./movies.js";
 import { signup, login, updateAuthUI } from "./register.js";
 
 async function initialize() {
   // Load header and footer
-  await loadHeaderFooter();
+  // await loadHeaderFooter();
 
   // Update UI based on login status
   updateAuthUI();
