@@ -24,7 +24,7 @@ export function createMovieCard(movie) {
   const movieCard = document.createElement("li");
   movieCard.className = "movie-card";
   movieCard.innerHTML = `
-    <a href="#" class="movie_list_info">
+    <a href="/wdd330-final/" class="movie_list_info">
       <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.original_title}" class="poster">
       <div class="wrap" style="display:none; opacity: 1;">
         <h3 class="title">${movie.title}</h3>
