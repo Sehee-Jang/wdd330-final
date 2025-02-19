@@ -1,4 +1,8 @@
-import { validateEmail, validatePassword } from "../utils/auth.js";
+import {
+  validateEmail,
+  validatePassword,
+  confirmPassword,
+} from "../utils/auth.js";
 
 /* *****************************
  * Modals
@@ -25,6 +29,15 @@ export function closeModals() {
 export function signup() {
   const email = document.getElementById("signup-email").value.trim();
   const password = document.getElementById("signup-password").value.trim();
+  const confirmPasswordValue = document
+    .getElementById("signup-confirm-password")
+    .value.trim();
+
+  // Check if all required fields are filled
+  if (!email || !password || !confirmPasswordValue) {
+    alert("Please fill in all fields.");
+    return;
+  }
 
   // 이메일과 비밀번호 유효성 검사
   if (!validateEmail(email)) {
@@ -33,7 +46,16 @@ export function signup() {
   }
 
   if (!validatePassword(password)) {
-    alert("Password must be at least 8 characters long.");
+    errorText.textContent =
+      "Password must be at least 8 characters long and include uppercase, lowercase, numbers, and special characters.";
+    errorText.style.color = "red";
+  } else {
+    errorText.textContent = "This is a password that can be used.";
+    errorText.style.color = "green";
+  }
+
+  if (!confirmPassword(password, confirmPasswordValue)) {
+    alert("Passwords do not match.");
     return;
   }
 
